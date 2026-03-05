@@ -1,0 +1,769 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wallpapers</title>
+    <link rel="icon" href="pics/favicon-32x32.png" />
+
+    <!-- locomotive scroll cdn -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+    />
+
+    <!-- swiper js css cdn link -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="fixed-image"></div>
+
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu-overlay">
+      <button id="mobile-menu-close">✕ CLOSE</button>
+      <a href="#">Home</a>
+      <a href="#">WPics</a>
+      <a href="#">WVideos</a>
+      <a href="upload.html" target="_blank">Upload</a>
+    </div>
+
+    <div id="main">
+      <div id="page1">
+        <nav>
+          <img id="logo" src="pics/Wallpaper word.png" alt="" srcset="" />
+          <div id="nav-part2">
+            <h4><a href="#page1">Home</a></h4>
+            <h4><a href="#page3">WPics</a></h4>
+            <h4><a href="#page4">WVideos</a></h4>
+            <h4><a href="upload.html" target="_blank">Upload</a></h4>
+          </div>
+          <h3>MENU</h3>
+        </nav>
+        
+        <div id="center">
+          <div id="left">
+            <h3>
+              Nothing special here, Just some random wallpapers. Some are
+              pictures and some of them are videos aka live Wallpapers
+            </h3>
+          </div>
+          <div id="right">
+            <h1>
+              Wallpaper <br />
+              That Inspire's <br />
+              Nothing (^_^)!
+            </h1>
+          </div>
+        </div>
+        
+        <div id="hero-shape">
+          <div id="hero1"></div>
+          <div id="hero2"></div>
+          <div id="hero3"></div>
+        </div>
+        
+        <div class="video-container">
+          <video loop muted autoplay playsinline>
+            <source
+              src="pics/LiveWallpapers/Live_walpapwes mp4/Hatsune-Miku.mp4"
+              type="video/mp4"
+            />
+          </video>
+
+          <div class="video-overlay">
+            <p>Wana get this shit? just hit the DOWNLOAD!</p>
+            <button class="download-btn" onclick="downloadVideo(event)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download Video
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="page2">
+        <div id="moving-text">
+          <div id="con">
+            <h1>EXPERIENCE</h1>
+            <div id="circle"></div>
+            <h1>THE</h1>
+            <div id="circle"></div>
+            <h1>WALLPAPERS</h1>
+            <div id="circle"></div>
+          </div>
+          <div id="con">
+            <h1>EXPERIENCE</h1>
+            <div id="circle"></div>
+            <h1>THE</h1>
+            <div id="circle"></div>
+            <h1>WALLPAPERS</h1>
+            <div id="circle"></div>
+          </div>
+          <div id="con">
+            <h1>EXPERIENCE</h1>
+            <div id="circle"></div>
+            <h1>THE</h1>
+            <div id="circle"></div>
+            <h1>WALLPAPERS</h1>
+            <div id="circle"></div>
+          </div>
+        </div>
+        <div id="page2-bottom">
+          <h1>
+            We spend hours every day staring at our screens—why not make that
+            view inspiring? A wallpaper isn’t just a background; it’s a digital
+            vibe check.
+          </h1>
+          <div id="bottom-part2">
+            <img
+              id="pic1"
+              src="pics/LiveWallpapers/WallPapers/green_leaves.jpg"
+              alt=""
+            />
+            <p>
+              Mental Clarity: Minimalist landscapes help reduce visual clutter
+              and focus the mind. <br />
+              Instant Inspiration: High-resolution art or travel photography can
+              spark your next big idea. <br />
+              Personal Expression: Your setup should be a reflection of your
+              personality, from vibrant abstracts to cozy aesthetics.
+            </p>
+          </div>
+        </div>
+        <div id="page2-animation"></div>
+      </div>
+
+      <div id="page3">
+        <p style="font-size: large; padding: 2vw"><strong>Pics</strong></p>
+        <!-- Wallpapers Pics -->
+
+        <div class="elems-container">
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/1354674.png"
+          >
+            <div class="overlay"></div>
+            <h2>1354674</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/1364851.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>1364851</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/acebackground.webp"
+          >
+            <div class="overlay"></div>
+            <h2>ace background</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/anime-desktop-wallpaper-4k.webp"
+          >
+            <div class="overlay"></div>
+            <h2>anime-desktop-wallpaper-4k</h2>
+          </div>
+
+          <div class="elem" data-image="pics/LiveWallpapers/WallPapers/ap9.jpg">
+            <div class="overlay"></div>
+            <h2>AP9</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/backiee-304060-landscape.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>backiee-304060-landscape</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/backiee-310808-landscape.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>backiee-310808-landscape</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/bladeii.webp"
+          >
+            <div class="overlay"></div>
+            <h2>bladeii</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/bmw-1920x1080.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>bmw m8</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/bmw-m3-angel-eyes-black-background-5k-2880x1800-896.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>bmw</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/bmw.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>bmw m3</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/boat&river.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>boat & river</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/bubbles-wallpaper.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>bubbles</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/coding-background.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>coding background</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/cyberpunk-sci-fi-anime-girl-nun-hd-wallpaper-uhdpaper.com-152@5@h.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>cyberpunk si-fi</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/dark-gaming-3840-x-2160-wallpaper-9dy7kwu8sgqtx7vv.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>dark gaming</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/demon-slayer-5120x2880.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>demon-slayer</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/download_1.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>download</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/download_2.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>download</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/florian-olivo-4hbJ-eymZ1o-unsplash.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>coding shit</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/florian-olivo-Ek9Znm8lQ1U-unsplash.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>coding shit again</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/flowers.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>flowers</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/girls-frontline-4k-al.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>girls frontline</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/goku-background.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>goku</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/ichigo.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>ichigo</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/itachiwallpaper.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>itachi</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/itachi-uchiha-4k-5120x2880.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>itachi uchiha</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/jonatan-pie.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>jonatan pie</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/kakashibackground.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>kakashi</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>coding shit once again</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/lamborgini.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>lamborgini</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/luffy.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>luffy</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/mountains.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>mountains</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/nezko-kamado.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>nezko kamado</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/pexels-byrahul-695644.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>pixels</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/qZYwNb.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>qzywnb</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/rengokubackground.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>rengoku</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/ryomensukuna.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>sakuna</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/sasukebackground.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>sasuke</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/satoru-gojo-4k_5120x2880.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>gojo</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/satoru-gojo-black-5120x2880-14684.png"
+          >
+            <div class="overlay"></div>
+            <h2>gojo1</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/shinobu-kocho-3840x2400.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>shinobu</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/shinobu-kocho-katana-kimetsu-no-yaiba_5120x2880.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>shinobu1</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/skeletonBerserk.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>skeleton berserk</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/snow-mountains.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>snow mountain</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/sololeveling.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>solo leveling</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/solo-leveling_7680x4320.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>sun jin wu</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/super-car-background.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>bugati</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/tanjiroKamado.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>tanjiro</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/thumb-1920-430889.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>thumbs up</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/thumb-1920-1009838.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>zoro dark</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/walpaper-background.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>squares</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/wp5136666.jpg"
+          >
+            <div class="overlay"></div>
+            <h2>ichigo bankai</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/wp7346888.webp"
+          >
+            <div class="overlay"></div>
+            <h2>dark robot</h2>
+          </div>
+
+          <div class="elem" data-image="pics/LiveWallpapers/WallPapers/wp1.jpg">
+            <div class="overlay"></div>
+            <h2>wp1</h2>
+          </div>
+
+          <div class="elem" data-image="pics/LiveWallpapers/WallPapers/wp2.jpg">
+            <div class="overlay"></div>
+            <h2>wp2</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/wp3.webp"
+          >
+            <div class="overlay"></div>
+            <h2>wp3</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/ZenitsuAgatsuma.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>zenitsu</h2>
+          </div>
+
+          <div
+            class="elem"
+            data-image="pics/LiveWallpapers/WallPapers/zoro.jpeg"
+          >
+            <div class="overlay"></div>
+            <h2>zoro</h2>
+          </div>
+        </div>
+      </div>
+
+      <div id="page4">
+        <!-- adding swiper using swiper-js -->
+         <p style="font-size: large; padding: 2vw"><strong>Live wallpapers Videos</strong></p>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/anime-girl-mazda-rx7-moewalls-com.mp4"></video>
+              <!-- <button class="download-btn" id="btn" onclick="downloadVideo(event)">Click Me to Download</button> -->
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/beyond-the-rolling-hills.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/black-bmw-standing.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/black-hole.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-5-fall-roads.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-5-series-g30.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-in-nfs.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-m3-legend.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-m4-black.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-m4-parked-on-a-wet-road-at-night_2.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/bmw-m5-in-dark.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/DragonBall-Ultra-Instinct.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/galbrena-x-rover-falling-stars-wuthering-waves-moewalls-com.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Glitchy Windows.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/gojo-blue-sky-jujutsu-kaisen-moewalls-com.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/large-cherry-blossom-tree.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/mylivewallpapers-com-BMW-M3-On-The-Run-4K.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/nissan-silvia.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Nissan-GTR.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/One-Piece.mp4"></video>
+            </div>
+            <!-- <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/revenge-rainy-night-where-winds-meet-moewalls-com.mp4"></video>
+            </div> -->
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/shadow-monarch-jinwoo.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/toyota-supra-rz.1920x1080.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Vegeta-SSB.mp4"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Xayah-the-Rebel-4K.mp4"></video>
+            </div>
+            <!-- <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Goku MUI.wmv"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Goku UI.wmv"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Itachi.wmv"></video>
+            </div>
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/Luffy-Gear-5.wmv"></video>
+            </div> 
+            <div class="swiper-slide">
+              <video loop muted autoplay playsinline src="pics/LiveWallpapers/Live_walpapwes mp4/tachi-Black.wmv"></video>
+            </div> -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+
+      <div id="page5"></div>
+    </div>
+
+    <div id="footer">
+      <div id="footer-div">
+        <div class="custom-shape-divider-top-1772569343">
+          <svg
+            data-name="Layer 1"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 120"
+            preserveAspectRatio="none"
+          >
+            <path
+              d="M600,112.77C268.63,112.77,0,65.52,0,7.23V120H1200V7.23C1200,65.52,931.37,112.77,600,112.77Z"
+              class="shape-fill"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <h1>Live ~ Wallpapers</h1>
+      <div id="footer-bottom">
+        <p>Copyright © 2026 Live Wallpapers. All rights reserved.</p>
+      </div>
+    </div>
+
+    <!-- <div id="full-scr"></div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"
+      integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"
+      integrity="sha512-P2IDYZfqSwjcSjX0BKeNhwRUH8zRPGlgcWl5n6gBLzdi4Y5/0O4zaXrtO4K9TZK6Hn1BenYpKowuCavNandERg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- swiper-js js cdn link -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

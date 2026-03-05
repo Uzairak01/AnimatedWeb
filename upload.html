@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload — Live Wallpapers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- styling for upload page -->
+    <style>
+      /* ── Reset & Base ─────────────────────────────────── */
+      *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg:        #efeae3;
+        --dark:      #111111;
+        --mid:       #3b3b3b;
+        --muted:     #888888;
+        --accent:    #c8b89a;
+        --border:    #c5bfb6;
+        --white:     #ffffff;
+        --danger:    #cc4444;
+        --success:   #3a7c52;
+        --card-bg:   #e8e2da;
+        --font-disp: "Bebas Neue", sans-serif;
+        --font-body: "DM Sans", sans-serif;
+        --radius:    12px;
+        --transition: 0.25s ease;
+      }
+
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        background-color: var(--bg);
+        font-family: var(--font-body);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+
+      /* ── Noise texture overlay ───────────────────────── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.035;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        background-size: 200px 200px;
+      }
+
+      /* ── Nav ─────────────────────────────────────────── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 80px;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 4vw;
+        backdrop-filter: blur(16px);
+        background-color: rgba(239, 234, 227, 0.75);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-logo {
+        font-family: var(--font-disp);
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+        color: var(--dark);
+        text-decoration: none;
+      }
+
+      .nav-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 22px;
+        border: 2px solid var(--mid);
+        border-radius: 50px;
+        font-family: var(--font-body);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--mid);
+        text-decoration: none;
+        transition: background var(--transition), color var(--transition);
+        cursor: pointer;
+        background: none;
+      }
+
+      .nav-back:hover {
+        background: var(--dark);
+        color: var(--white);
+        border-color: var(--dark);
+      }
+
+      .nav-back svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* ── Page wrapper ────────────────────────────────── */
+      #page-wrapper {
+        position: relative;
+        z-index: 1;
+        padding-top: 80px;
+      }
+
+      /* ── Hero Header ─────────────────────────────────── */
+      #upload-hero {
+        padding: 6vw 6vw 4vw;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border);
+      }
+
+      #upload-hero .tag {
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      #upload-hero h1 {
+        font-family: var(--font-disp);
+        font-size: clamp(3.5rem, 9vw, 8rem);
+        line-height: 0.95;
+        letter-spacing: 2px;
+        color: var(--dark);
+      }
+
+      #upload-hero h1 span {
+        color: var(--muted);
+      }
+
+      #upload-hero p {
+        max-width: 480px;
+        font-size: 1rem;
+        font-weight: 300;
+        color: var(--mid);
+        line-height: 1.7;
+        margin-top: 0.5rem;
+      }
+
+      /* ── Upload Zone ─────────────────────────────────── */
+      #upload-section {
+        padding: 4vw 6vw;
+        border-bottom: 1px solid var(--border);
+      }
+
+      #drop-zone {
+        position: relative;
+        width: 100%;
+        min-height: 260px;
+        border: 2px dashed var(--border);
+        border-radius: 20px;
+        background-color: var(--card-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.2rem;
+        cursor: pointer;
+        transition: border-color var(--transition), background-color var(--transition), transform var(--transition);
+        overflow: hidden;
+      }
+
+      #drop-zone.drag-over {
+        border-color: var(--dark);
+        background-color: #e0d9d0;
+        transform: scale(1.01);
+      }
+
+      #drop-zone.drag-over .drop-icon {
+        transform: translateY(-6px) scale(1.1);
+      }
+
+      #drop-zone input[type="file"] {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+      }
+
+      .drop-icon {
+        width: 64px;
+        height: 64px;
+        color: var(--muted);
+        transition: transform 0.3s ease;
+      }
+
+      .drop-label {
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .drop-label strong {
+        display: block;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 4px;
+      }
+
+      .drop-label span {
+        font-size: 0.9rem;
+        color: var(--muted);
+        font-weight: 300;
+      }
+
+      .drop-formats {
+        display: flex;
+        gap: 8px;
+        pointer-events: none;
+      }
+
+      .fmt-badge {
+        padding: 4px 12px;
+        border: 1px solid var(--border);
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: var(--muted);
+        background: var(--bg);
+      }
+
+      /* ── Grid Section ────────────────────────────────── */
+      #gallery-section {
+        padding: 4vw 6vw 8vw;
+        min-height: 200px;
+      }
+
+      .section-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .section-header h2 {
+        font-family: var(--font-disp);
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        letter-spacing: 1px;
+        line-height: 1;
+      }
+
+      #video-count {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--muted);
+        background: var(--card-bg);
+        padding: 6px 16px;
+        border-radius: 50px;
+        border: 1px solid var(--border);
+      }
+
+      .clear-btn {
+        background: none;
+        border: 2px solid var(--danger);
+        color: var(--danger);
+        padding: 7px 18px;
+        border-radius: 50px;
+        font-family: var(--font-body);
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background var(--transition), color var(--transition);
+        letter-spacing: 0.5px;
+      }
+
+      .clear-btn:hover {
+        background: var(--danger);
+        color: var(--white);
+      }
+
+      /* ── Video Grid ──────────────────────────────────── */
+      #video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+
+      /* ── Empty State ─────────────────────────────────── */
+      #empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        min-height: 200px;
+        color: var(--muted);
+        text-align: center;
+        border: 1px dashed var(--border);
+        border-radius: 16px;
+        padding: 3rem;
+      }
+
+      #empty-state svg {
+        width: 48px;
+        height: 48px;
+        opacity: 0.4;
+      }
+
+      #empty-state p {
+        font-size: 1rem;
+        font-weight: 300;
+      }
+
+      /* ── Video Card ──────────────────────────────────── */
+      .video-card {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        background: var(--dark);
+        aspect-ratio: 16/10;
+        group: 1;
+        animation: card-in 0.4s ease both;
+      }
+
+      @keyframes card-in {
+        from { opacity: 0; transform: translateY(20px) scale(0.97); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .video-card video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: filter 0.3s ease;
+      }
+
+      .video-card:hover video {
+        filter: brightness(0.55);
+      }
+
+      /* Card overlay on hover */
+      .card-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        padding: 12px;
+      }
+
+      .video-card:hover .card-overlay {
+        opacity: 1;
+      }
+
+      .card-filename {
+        color: var(--white);
+        font-size: 0.78rem;
+        font-weight: 500;
+        text-align: center;
+        word-break: break-all;
+        padding: 0 8px;
+        text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+        max-width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .card-actions {
+        display: flex;
+        gap: 8px;
+      }
+
+      .card-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 7px 14px;
+        border-radius: 50px;
+        font-family: var(--font-body);
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+
+      .card-btn:hover {
+        transform: scale(1.06);
+      }
+
+      .card-btn svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .btn-download {
+        background: var(--white);
+        color: var(--dark);
+      }
+
+      .btn-remove {
+        background: var(--danger);
+        color: var(--white);
+      }
+
+      /* Card number badge */
+      .card-num {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.55);
+        color: var(--white);
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(4px);
+      }
+
+      /* ── Toast Notification ──────────────────────────── */
+      #toast-container {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        pointer-events: none;
+      }
+
+      .toast {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--white);
+        backdrop-filter: blur(10px);
+        animation: toast-in 0.35s ease;
+        pointer-events: auto;
+        max-width: 320px;
+        box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+      }
+
+      .toast.success { background: rgba(40, 100, 60, 0.92); }
+      .toast.error   { background: rgba(160, 40, 40, 0.92); }
+      .toast.info    { background: rgba(40, 40, 40, 0.92); }
+
+      .toast svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+      @keyframes toast-in {
+        from { opacity: 0; transform: translateX(40px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+
+      @keyframes toast-out {
+        from { opacity: 1; transform: translateX(0); }
+        to   { opacity: 0; transform: translateX(40px); }
+      }
+
+      /* ── Footer ──────────────────────────────────────── */
+      footer {
+        background: var(--dark);
+        color: var(--white);
+        text-align: center;
+        padding: 30px;
+        font-size: 0.85rem;
+        font-weight: 300;
+        letter-spacing: 0.5px;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* ── Progress bar on drop zone ───────────────────── */
+      #progress-bar-wrap {
+        display: none;
+        width: 100%;
+        max-width: 420px;
+        height: 6px;
+        background: var(--border);
+        border-radius: 50px;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      #progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--dark);
+        border-radius: 50px;
+        transition: width 0.2s ease;
+      }
+
+      /* ── Responsive ──────────────────────────────────── */
+      @media (max-width: 900px) {
+        #video-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        #upload-hero {
+          padding: 8vw 5vw 5vw;
+        }
+
+        #upload-section,
+        #gallery-section {
+          padding-left: 5vw;
+          padding-right: 5vw;
+        }
+
+        #video-grid {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        #drop-zone {
+          min-height: 200px;
+        }
+
+        .drop-label strong {
+          font-size: 1rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Nav -->
+    <nav>
+      <a class="nav-logo" href="index.html">Live~Wallpapers</a>
+      <a class="nav-back" href="index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+        Back
+      </a>
+    </nav>
+
+    <div id="page-wrapper">
+      <!-- Hero -->
+      <section id="upload-hero">
+        <p class="tag">Live Wallpapers &mdash; Community</p>
+        <h1>UPLOAD <span>YOUR</span><br />WALLPAPERS</h1>
+        <p>Drop your live wallpaper videos below. They'll be displayed in a grid — up to 3 per row. Supports MP4, WebM, and MOV.</p>
+      </section>
+
+      <!-- Upload Zone -->
+      <section id="upload-section">
+        <div id="drop-zone">
+          <input
+            type="file"
+            id="file-input"
+            accept="video/mp4,video/webm,video/quicktime,.mp4,.webm,.mov"
+            multiple
+          />
+          <svg class="drop-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+            fill="none" stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="17 8 12 3 7 8"/>
+            <line x1="12" y1="3" x2="12" y2="15"/>
+          </svg>
+          <div class="drop-label">
+            <strong>Drag &amp; drop videos here</strong>
+            <span>or click anywhere to browse</span>
+          </div>
+          <div class="drop-formats">
+            <span class="fmt-badge">MP4</span>
+            <span class="fmt-badge">WEBM</span>
+            <span class="fmt-badge">MOV</span>
+          </div>
+          <div id="progress-bar-wrap">
+            <div id="progress-bar-fill"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gallery -->
+      <section id="gallery-section">
+        <div class="section-header">
+          <h2>YOUR UPLOADS</h2>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <span id="video-count">0 videos</span>
+            <button class="clear-btn" id="clear-all-btn" style="display:none;" onclick="clearAll()">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <div id="empty-state">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="4"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+          <p>No videos yet — upload some wallpapers to get started!</p>
+        </div>
+
+        <div id="video-grid" style="display:none;"></div>
+      </section>
+    </div>
+
+    <!-- Toast container -->
+    <div id="toast-container"></div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Copyright &copy; 2026 Live Wallpapers. All rights reserved.</p>
+    </footer>
+
+    <!-- js part -->
+    <script>
+      // ── State ──────────────────────────────────────────────────────────
+      const uploadedVideos = []; // { id, file, objectUrl, name }
+      let idCounter = 0;
+
+      // ── DOM refs ───────────────────────────────────────────────────────
+      const dropZone     = document.getElementById("drop-zone");
+      const fileInput    = document.getElementById("file-input");
+      const videoGrid    = document.getElementById("video-grid");
+      const emptyState   = document.getElementById("empty-state");
+      const videoCount   = document.getElementById("video-count");
+      const clearAllBtn  = document.getElementById("clear-all-btn");
+      const progressWrap = document.getElementById("progress-bar-wrap");
+      const progressFill = document.getElementById("progress-bar-fill");
+
+      // ── Drag & Drop events ─────────────────────────────────────────────
+      dropZone.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropZone.classList.add("drag-over");
+      });
+
+      dropZone.addEventListener("dragleave", (e) => {
+        if (!dropZone.contains(e.relatedTarget)) {
+          dropZone.classList.remove("drag-over");
+        }
+      });
+
+      dropZone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropZone.classList.remove("drag-over");
+        const files = Array.from(e.dataTransfer.files).filter(isVideo);
+        if (files.length) {
+          processFiles(files);
+        } else {
+          showToast("Only video files (MP4, WebM, MOV) are accepted.", "error");
+        }
+      });
+
+      // ── File input change ──────────────────────────────────────────────
+      fileInput.addEventListener("change", () => {
+        const files = Array.from(fileInput.files).filter(isVideo);
+        if (files.length) {
+          processFiles(files);
+        } else if (fileInput.files.length > 0) {
+          showToast("Only video files (MP4, WebM, MOV) are accepted.", "error");
+        }
+        fileInput.value = ""; // reset so same file can be re-added
+      });
+
+      // ── Helpers ────────────────────────────────────────────────────────
+      function isVideo(file) {
+        return file.type.startsWith("video/") ||
+               /\.(mp4|webm|mov)$/i.test(file.name);
+      }
+
+      function processFiles(files) {
+        // Animate progress bar
+        progressWrap.style.display = "block";
+        let pct = 0;
+        const tick = setInterval(() => {
+          pct = Math.min(pct + Math.random() * 25, 95);
+          progressFill.style.width = pct + "%";
+        }, 80);
+
+        setTimeout(() => {
+          clearInterval(tick);
+          progressFill.style.width = "100%";
+          setTimeout(() => {
+            progressFill.style.width = "0%";
+            progressWrap.style.display = "none";
+          }, 400);
+
+          files.forEach(addVideo);
+          renderGrid();
+          showToast(
+            files.length === 1
+              ? `"${files[0].name}" added!`
+              : `${files.length} videos added!`,
+            "success"
+          );
+        }, files.length * 120 + 200);
+      }
+
+      function addVideo(file) {
+        const objectUrl = URL.createObjectURL(file);
+        const id = ++idCounter;
+        uploadedVideos.push({ id, file, objectUrl, name: file.name });
+      }
+
+      function renderGrid() {
+        videoGrid.innerHTML = "";
+
+        if (uploadedVideos.length === 0) {
+          emptyState.style.display = "flex";
+          videoGrid.style.display  = "none";
+          clearAllBtn.style.display = "none";
+          videoCount.textContent = "0 videos";
+          return;
+        }
+
+        emptyState.style.display = "none";
+        videoGrid.style.display  = "grid";
+        clearAllBtn.style.display = "inline-flex";
+        videoCount.textContent = `${uploadedVideos.length} video${uploadedVideos.length !== 1 ? "s" : ""}`;
+
+        uploadedVideos.forEach((v, index) => {
+          const card = document.createElement("div");
+          card.className = "video-card";
+          card.dataset.id = v.id;
+          card.style.animationDelay = `${(index % 3) * 60}ms`;
+
+          card.innerHTML = `
+            <span class="card-num">${index + 1}</span>
+            <video
+              src="${v.objectUrl}"
+              loop muted autoplay playsinline
+              preload="metadata"
+            ></video>
+            <div class="card-overlay">
+              <span class="card-filename" title="${v.name}">${v.name}</span>
+              <div class="card-actions">
+                <button class="card-btn btn-download" onclick="downloadVideo(${v.id}, event)">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Download
+                </button>
+                <button class="card-btn btn-remove" onclick="removeVideo(${v.id})">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="3 6 5 6 21 6"/>
+                    <path d="M19 6l-1 14H6L5 6"/>
+                    <path d="M10 11v6M14 11v6"/>
+                    <path d="M9 6V4h6v2"/>
+                  </svg>
+                  Remove
+                </button>
+              </div>
+            </div>
+          `;
+
+          videoGrid.appendChild(card);
+        });
+      }
+
+      function removeVideo(id) {
+        const idx = uploadedVideos.findIndex((v) => v.id === id);
+        if (idx === -1) return;
+        URL.revokeObjectURL(uploadedVideos[idx].objectUrl);
+        uploadedVideos.splice(idx, 1);
+        renderGrid();
+        showToast("Video removed.", "info");
+      }
+
+      function downloadVideo(id, event) {
+        event.stopPropagation();
+        const v = uploadedVideos.find((v) => v.id === id);
+        if (!v) return;
+        const a = document.createElement("a");
+        a.href = v.objectUrl;
+        a.download = v.name;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        showToast(`Downloading "${v.name}"`, "success");
+      }
+
+      function clearAll() {
+        uploadedVideos.forEach((v) => URL.revokeObjectURL(v.objectUrl));
+        uploadedVideos.length = 0;
+        renderGrid();
+        showToast("All videos cleared.", "info");
+      }
+
+      // ── Toast ──────────────────────────────────────────────────────────
+      function showToast(message, type = "info") {
+        const container = document.getElementById("toast-container");
+
+        const icons = {
+          success: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"/></svg>`,
+          error: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/></svg>`,
+          info: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8"/>
+            <line x1="12" y1="12" x2="12" y2="16"/></svg>`,
+        };
+
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.innerHTML = `${icons[type]}<span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = "toast-out 0.35s ease forwards";
+          toast.addEventListener("animationend", () => toast.remove());
+        }, 3200);
+      }
+    </script>
+  </body>
+</html>
